@@ -1,0 +1,131 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | SecureShare{% endblock %}
+
+{% block content %}
+<section class="dashboard-header">
+    <p class="eyebrow">YOUR WORKSPACE</p>
+    <h1>Welcome, {{ current_user.username }}.</h1>
+    <p>
+        Signed in with the <strong>{{ current_user.role }}</strong> role.
+    </p>
+</section>
+
+<section class="feature-card">
+    <h2>Upload a file</h2>
+    <p>
+        Allowed formats: PDF, TXT, PNG, JPG, JPEG and DOCX.
+        Maximum size: 10 MiB.
+    </p>
+
+    <form
+        method="post"
+        action="{{ url_for('upload_file') }}"
+        enctype="multipart/form-data"
+    >
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="file">Choose a file</label>
+        <input
+            id="file"
+            name="file"
+            type="file"
+            accept=".pdf,.txt,.png,.jpg,.jpeg,.docx"
+            required
+        >
+
+        <button class="button" type="submit">Upload securely</button>
+    </form>
+</section>
+
+<section class="feature-card" style="margin-top: 24px;">
+    <h2>
+        {% if current_user.role == "admin" %}
+            All stored files
+        {% else %}
+            Your files
+        {% endif %}
+    </h2>
+
+    {% if files %}
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; padding: 10px;">Filename</th>
+                        {% if current_user.role == "admin" %}
+                            <th style="text-align: left; padding: 10px;">Owner</th>
+                        {% endif %}
+                        <th style="text-align: left; padding: 10px;">Size</th>
+                        <th style="text-align: left; padding: 10px;">Uploaded</th>
+                        <th style="text-align: left; padding: 10px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                        <tr>
+                            <td style="padding: 10px;">
+                                {{ file["original_name"] }}
+                            </td>
+
+                            {% if current_user.role == "admin" %}
+                                <td style="padding: 10px;">
+                                    {{ file["owner_username"] }}
+                                </td>
+                            {% endif %}
+
+                            <td style="padding: 10px;">
+                                {{ "%.2f"|format(file["size_bytes"] / 1048576) }} MiB
+                            </td>
+
+                            <td style="padding: 10px;">
+                                {{ file["uploaded_at"] }}
+                            </td>
+
+                            <td style="padding: 10px;">
+                                <p>
+                                    <a href="{{ url_for('download_file', file_id=file['id']) }}">
+                                        Direct download
+                                    </a>
+                                </p>
+
+                                <form
+                                    method="post"
+                                    action="{{ url_for('create_share_link', file_id=file['id']) }}"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        value="{{ csrf_token() }}"
+                                    >
+
+                                    <label for="duration-{{ file['id'] }}">
+                                        Link expires after
+                                    </label>
+
+                                    <select
+                                        id="duration-{{ file['id'] }}"
+                                        name="duration"
+                                        required
+                                    >
+                                        <option value="5">5 minutes</option>
+                                        <option value="60" selected>1 hour</option>
+                                        <option value="1440">24 hours</option>
+                                    </select>
+
+                                    <button class="button" type="submit">
+                                        Create temporary link
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No files uploaded yet. Choose a file above to get started.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block title %}Welcome | SecureShare{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">SECURE FILE SHARING</p>
+    <h1>Your files. Protected.</h1>
+    <p class="hero-text">
+        A local file-sharing application with authenticated access,
+        encrypted file storage, and role-based permissions.
+    </p>
+
+    <div class="actions">
+        <a class="button" href="{{ url_for('register') }}">Create an account</a>
+        <a class="button button-secondary" href="{{ url_for('login') }}">Log in</a>
+    </div>
+</section>
+
+<section class="feature-grid">
+    <article class="feature-card">
+        <h2>Encrypted storage</h2>
+        <p>File contents are encrypted before being written to storage.</p>
+    </article>
+    <article class="feature-card">
+        <h2>Authenticated access</h2>
+        <p>Users must log in to access protected application features.</p>
+    </article>
+    <article class="feature-card">
+        <h2>Access control</h2>
+        <p>Account roles and file ownership help restrict access.</p>
+    </article>
+</section>
+{% endblock %}

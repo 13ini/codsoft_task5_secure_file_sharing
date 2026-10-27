@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+
+{% block title %}Register | SecureShare{% endblock %}
+
+{% block content %}
+<section class="form-card">
+    <h1>Create your account</h1>
+    <p>Choose a username and a password of at least 12 characters.</p>
+
+    <form method="post" action="{{ url_for('register') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text"
+               minlength="1" maxlength="50" required autocomplete="username">
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"
+               minlength="12" required autocomplete="new-password">
+
+        <button class="button" type="submit">Register</button>
+    </form>
+
+    <p class="form-note">
+        Already registered? <a href="{{ url_for('login') }}">Log in</a>
+    </p>
+</section>
+{% endblock %}

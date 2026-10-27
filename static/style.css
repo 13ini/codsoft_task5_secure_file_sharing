@@ -1,0 +1,274 @@
+
+:root {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #172033;
+    background: #f4f7fb;
+    font-synthesis: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 7%;
+    background: #142b4a;
+    color: white;
+}
+
+.brand {
+    color: white;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+nav a,
+.nav-button {
+    color: white;
+    text-decoration: none;
+    font: inherit;
+}
+
+nav a:hover,
+.nav-button:hover {
+    color: #b8d7ff;
+}
+
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.nav-button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.container {
+    width: min(1080px, 90%);
+    margin: 0 auto;
+    padding: 48px 0;
+    flex: 1;
+}
+
+.hero {
+    padding: 48px 36px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid #e1e8f0;
+}
+
+.eyebrow {
+    color: #2463a6;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+h1 {
+    margin: 8px 0 14px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+}
+
+.hero-text {
+    max-width: 650px;
+    color: #536174;
+    font-size: 1.1rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.button {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid #205da8;
+    border-radius: 8px;
+    background: #205da8;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #17477f;
+}
+
+.button-secondary {
+    background: white;
+    color: #205da8;
+}
+
+.button-secondary:hover {
+    background: #edf4fc;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.feature-card,
+.form-card {
+    padding: 26px;
+    border: 1px solid #e1e8f0;
+    border-radius: 14px;
+    background: white;
+}
+
+.feature-card h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+}
+
+.feature-card p,
+.form-card p {
+    color: #536174;
+}
+
+.form-card {
+    width: min(480px, 100%);
+    margin: 0 auto;
+}
+
+.form-card h1 {
+    font-size: 2rem;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.form-card label {
+    font-weight: 600;
+}
+
+.form-card input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font: inherit;
+    margin-bottom: 8px;
+}
+
+.form-card input:focus {
+    outline: 2px solid #8abaff;
+    border-color: #205da8;
+}
+
+.form-card .button {
+    margin-top: 8px;
+}
+
+.form-note {
+    margin-top: 22px;
+    font-size: 0.95rem;
+}
+
+a {
+    color: #205da8;
+}
+
+.site-header a {
+    color: white;
+}
+
+.dashboard-header {
+    margin-bottom: 28px;
+}
+
+.status-note {
+    padding: 12px;
+    border-radius: 7px;
+    background: #edf4fc;
+    color: #254d7b !important;
+}
+
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.flash.success {
+    background: #e7f7ed;
+    color: #176538;
+}
+
+.flash.error {
+    background: #fff0f0;
+    color: #9c2525;
+}
+
+.site-footer {
+    padding: 20px;
+    background: #e8edf4;
+    color: #536174;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 4px 0;
+}
+
+@media (max-width: 700px) {
+    .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .container {
+        padding: 28px 0;
+    }
+
+    .hero {
+        padding: 28px 22px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
